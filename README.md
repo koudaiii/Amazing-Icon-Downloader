@@ -31,3 +31,39 @@ Visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/amazing-i
 * Migrate to Manifest v3
 
 #### For more history see the [releases page](https://github.com/mattl-msft/Amazing-Icon-Downloader/releases).
+
+## Developer mode
+
+If you want to use developer mode, please follow these steps:
+
+1. Clone this repository
+2. open `chrome://extensions` or `edge://extensions`
+3. enable Developer mode
+
+Chrome ver | Edge ver
+ -- | --
+![](/docs/img/1.chrome-enable-developer-mode.png) | ![](/docs/img/1.enable-developer-mode.png)
+
+4. Load Unpacked
+
+Chrome ver | Edge ver
+ -- | --
+![](/docs/img/2.chrome-Load-Unpacked.png) | ![](/docs/img/2.Load-Unpacked.png)
+
+5. select the `/dev` directory  on cloning at step 1.
+
+Chrome ver | Edge ver
+ -- | --
+![](/docs/img/3.chrome-Open.png) | ![](/docs/img/3.Open.png)
+
+6. Reload
+
+Chrome ver | Edge ver
+ -- | --
+![](/docs/img/4.chrome-Reload.png) | ![](/docs/img/4.Reload.png)
+
+7. Display bar
+
+Chrome ver | Edge ver
+ -- | --
+![](/docs/img/5.chrome-Add-bar.png) | ![](/docs/img/5.Add-bar.png)
