@@ -1,4 +1,12 @@
 {
+  "name": "amazing-icon-downloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "prettier": "prettier --check \"./**/*.{js,jsx,ts,tsx,json,css,scss}\"",
+    "prettier:fix": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,css,scss}\""
+  },
   "dependencies": {
     "prettier": "^3.2.5"
   }
