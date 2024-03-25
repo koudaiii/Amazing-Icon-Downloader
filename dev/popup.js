@@ -329,10 +329,10 @@ function getIcons() {
 	return result;
 }
 
-function getIconName(iconSVG, nameMap) {
+function getIconName(iconSVG, nameMap, suffix) {
 	let findID = document.createElement('div');
 	findID.innerHTML = iconSVG;
-	let elemID = findID.querySelector('svg')?.id || 'Icon';
+	let elemID = findID.querySelector('svg')?.id || 'Icon'+suffix;
 	let name = nameMap[elemID];
 	if (!name) name = elemID;
 	// if (name.startsWith('[object')) name = 'Icon';
@@ -353,7 +353,7 @@ function processIcons(list) {
 
 	for (let i = elements.length - 1; i > -1; i--) {
 		oneSVG = convertSVG(elements[i], list.defs);
-		oneName = getIconName(oneSVG, list.names);
+		oneName = getIconName(oneSVG, list.names, idSuffix);
 		_iconData[`id${idSuffix}`] = {
 			name: oneName,
 			svg: oneSVG,
