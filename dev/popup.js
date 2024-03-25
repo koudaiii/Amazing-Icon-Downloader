@@ -63,7 +63,7 @@ async function getCurrentTab() {
 	return tab;
 }
 
-function getIcons() {
+async function getIcons() {
 	// console.log(`\n\ngetIcons - START`);
 
 	// ========================================
@@ -72,9 +72,36 @@ function getIcons() {
 	let symbols = document.getElementById('FxSymbolContainer');
 	// console.log(symbols);
 
-	let webContainerSVG = document
-		.getElementById('web-container')
-		.querySelectorAll('svg');
+	let webContainerSVG = Array.from(document.querySelectorAll('svg'));
+	// console.log(webContainerSVG);
+
+	// find img tags with .svg
+	let imageTags = Array.from(document.querySelectorAll('img'));
+	let svgURLs = [];
+	svgURLs = imageTags.filter((node) => {
+		if (node.src.includes('.svg')) {
+			return node;
+		}});
+
+	// console.log(svgURLs);
+
+	// Define the fetchDocument function
+	async function fetchDocument(url) {
+		let response = await fetch(url, { mode: 'no-cors' });
+		let text = await response.text();
+		let parser = new DOMParser();
+		let svgdocument = parser.parseFromString(text, 'image/svg+xml');
+		return svgdocument;
+	}
+
+	// Wait for all the fetches to complete
+	await Promise.all(svgURLs.map(async (node) => {
+		let doc = await fetchDocument(node.src);
+		let svgTagList = Array.from(doc.querySelectorAll('svg'));
+		Array.from(svgTagList).forEach((node) => {
+			webContainerSVG.push(node);
+		});
+	}));
 	// console.log(webContainerSVG);
 	let hardCodedSVG = [];
 	webContainerSVG.forEach((node) => {
