@@ -63,15 +63,19 @@ async function getCurrentTab() {
   return tab;
 }
 
+function getSymbols() {
+  return document.getElementById('FxSymbolContainer');
+}
+
 async function getIcons() {
   // console.log(`\n\ngetIcons - START`);
 
   // ========================================
   // Find icons and early return if needed
   // ========================================
-  let symbols = document.getElementById('FxSymbolContainer');
-  // console.log(symbols);
 
+  let symbols = getSymbols();
+  // console.log(symbols);
   let webContainerSVG = Array.from(document.querySelectorAll('svg'));
   // console.log(webContainerSVG);
 
@@ -675,3 +679,7 @@ async function convertSVGToPNG(svg) {
   const resultData = workingCanvas.toDataURL('image/png');
   return resultData;
 }
+
+module.exports = {
+  getSymbols,
+};

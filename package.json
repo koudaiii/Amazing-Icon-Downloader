@@ -5,9 +5,22 @@
   "main": "",
   "scripts": {
     "prettier": "prettier --check \"./**/*.{js,jsx,ts,tsx,json,css,scss}\"",
-    "prettier:fix": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,css,scss}\""
+    "prettier:fix": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,css,scss}\"",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/dev/*.test.js"
+    ]
   },
   "dependencies": {
+    "jest": "^29.7.0",
     "prettier": "^3.2.5"
+  },
+  "devDependencies": {
+    "fetch-mock-jest": "^1.5.1",
+    "jest-environment-jsdom": "^29.7.0",
+    "node-fetch": "^2.6.6"
   }
 }
