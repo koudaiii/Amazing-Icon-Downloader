@@ -43,17 +43,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function showURLErrorMessage() {
   document.getElementById('bodyContent').innerHTML = `
-	<i style="grid-column: span 3; color: darkred;">
-		Amazing Icon Downloader does not work for this URL.
-		<br>
-		Currently this extension only works on:
-		<ul>
-			<li>portal.azure.com</li>
-			<li>endpoint.microsoft.com</li>
-		</ul>
-		<br>
-		Contact <a href="mailto:matt@mattlag.com">matt@mattlag.com</a> for help.
-	</i>`;
+      <i style="grid-column: span 3; color: darkred;">
+        Amazing Icon Downloader does not work for this URL.
+        <br>
+        Currently this extension only works on:
+        <ul>
+          <li>portal.azure.com</li>
+          <li>endpoint.microsoft.com</li>
+        </ul>
+        <br>
+        Contact <a href="mailto:matt@mattlag.com">matt@mattlag.com</a> for help.
+      </i>`;
 }
 
 async function getCurrentTab() {
@@ -682,4 +682,5 @@ async function convertSVGToPNG(svg) {
 
 module.exports = {
   getSymbols,
+  showURLErrorMessage,
 };
