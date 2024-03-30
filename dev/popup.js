@@ -711,4 +711,5 @@ module.exports = {
   getSymbols,
   showURLErrorMessage,
   getCurrentTab,
+  getWebContainerSVG,
 };
