@@ -12,8 +12,9 @@
     "testEnvironment": "jsdom",
     "testMatch": [
       "**/dev/*.test.js"
-    ]
-  },
+    ],
+    "setupFiles": ["<rootDir>/mock-extension-apis.js"]
+    },
   "dependencies": {
     "jest": "^29.7.0",
     "prettier": "^3.2.5"
