@@ -1,5 +1,5 @@
 global.chrome = {
   tabs: {
-    query: jest.fn()
-  }
+    query: jest.fn(),
+  },
 };
