@@ -84,6 +84,11 @@ function getSymbols() {
   return document.getElementById('FxSymbolContainer');
 }
 
+/**
+ * Retrieves all SVG elements within the document.
+ *
+ * @returns {Array<SVGElement>} An array of SVG elements.
+ */
 function getWebContainerSVG() {
   return Array.from(document.querySelectorAll('svg'));
 }
