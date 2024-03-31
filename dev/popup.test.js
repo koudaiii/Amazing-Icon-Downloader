@@ -1,8 +1,13 @@
 const popup = require('./popup');
 const fetchMock = require('fetch-mock-jest');
 
-const { getSymbols, showURLErrorMessage, getCurrentTab, getWebContainerSVG, findSVGURLs} =
-  popup;
+const {
+  getSymbols,
+  showURLErrorMessage,
+  getCurrentTab,
+  getWebContainerSVG,
+  findSVGURLs,
+} = popup;
 
 describe('getSymbols', () => {
   beforeEach(() => {

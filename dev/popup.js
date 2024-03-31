@@ -122,7 +122,7 @@ async function getIcons() {
   // console.log(webContainerSVG);
 
   let svgURLs = findSVGURLs();
-   // console.log(svgURLs);
+  // console.log(svgURLs);
 
   // Define the fetchDocument function
   async function fetchDocument(url) {
