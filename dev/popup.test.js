@@ -1,7 +1,7 @@
 const popup = require('./popup');
 const fetchMock = require('fetch-mock-jest');
 
-const { getSymbols, showURLErrorMessage, getCurrentTab, getWebContainerSVG } =
+const { getSymbols, showURLErrorMessage, getCurrentTab, getWebContainerSVG, findSVGURLs} =
   popup;
 
 describe('getSymbols', () => {
@@ -77,6 +77,42 @@ describe('getWebContainerSVG', () => {
 
     // Act
     const result = getWebContainerSVG();
+
+    // Assert
+    expect(result).toEqual([svgElement1, svgElement2]);
+  });
+});
+
+describe('findSVGURLs', () => {
+  beforeEach(() => {
+    // Reset the document body before each test
+    document.body.innerHTML = '';
+  });
+
+  it('should return an empty array if no SVG URLs are found', () => {
+    // Act
+    const result = findSVGURLs();
+
+    // Assert
+    expect(result).toEqual([]);
+  });
+
+  it('should return an array of SVG URLs', () => {
+    // Arrange
+    const svgElement1 = document.createElement('img');
+    svgElement1.src = 'image1.svg';
+    document.body.appendChild(svgElement1);
+
+    const svgElement2 = document.createElement('img');
+    svgElement2.src = 'image2.svg';
+    document.body.appendChild(svgElement2);
+
+    const nonSvgElement = document.createElement('img');
+    nonSvgElement.src = 'image3.png';
+    document.body.appendChild(nonSvgElement);
+
+    // Act
+    const result = findSVGURLs();
 
     // Assert
     expect(result).toEqual([svgElement1, svgElement2]);
