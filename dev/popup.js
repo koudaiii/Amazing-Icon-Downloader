@@ -108,6 +108,19 @@ function findSVGURLs() {
   return svgURLs;
 }
 
+/**
+ * Fetches a document from the specified URL and returns it as an SVG document.
+ * @param {string} url - The URL of the document to fetch.
+ * @returns {Promise<Document>} - A promise that resolves to the fetched SVG document.
+ */
+async function fetchDocument(url) {
+  let response = await fetch(url, { mode: 'no-cors' });
+  let text = await response.text();
+  let parser = new DOMParser();
+  let svgdocument = parser.parseFromString(text, 'image/svg+xml');
+  return svgdocument;
+}
+
 async function getIcons() {
   // console.log(`\n\ngetIcons - START`);
 
@@ -123,15 +136,6 @@ async function getIcons() {
 
   let svgURLs = findSVGURLs();
   // console.log(svgURLs);
-
-  // Define the fetchDocument function
-  async function fetchDocument(url) {
-    let response = await fetch(url, { mode: 'no-cors' });
-    let text = await response.text();
-    let parser = new DOMParser();
-    let svgdocument = parser.parseFromString(text, 'image/svg+xml');
-    return svgdocument;
-  }
 
   // Wait for all the fetches to complete
   await Promise.all(
@@ -720,4 +724,5 @@ module.exports = {
   getCurrentTab,
   getWebContainerSVG,
   findSVGURLs,
+  fetchDocument,
 };

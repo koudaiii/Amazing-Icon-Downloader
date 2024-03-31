@@ -7,6 +7,7 @@ const {
   getCurrentTab,
   getWebContainerSVG,
   findSVGURLs,
+  fetchDocument,
 } = popup;
 
 describe('getSymbols', () => {
@@ -121,5 +122,32 @@ describe('findSVGURLs', () => {
 
     // Assert
     expect(result).toEqual([svgElement1, svgElement2]);
+  });
+});
+
+describe('fetchDocument', () => {
+  beforeEach(() => {
+    // Reset the fetch mock before each test
+    fetchMock.reset();
+  });
+
+  it('should fetch the document and return the parsed SVG document', async () => {
+    // Arrange
+    const url = 'https://example.com/image.svg';
+    const mockResponse = '<svg><circle cx="50" cy="50" r="40" /></svg>';
+    fetchMock.mock(url, mockResponse);
+
+    // Act
+    const result = await fetchDocument(url);
+
+    // Assert
+    expect(fetchMock).toHaveBeenCalledWith(url, { mode: 'no-cors' });
+    expect(result).toBeInstanceOf(Document);
+    expect(result.documentElement.tagName).toBe('svg');
+    expect(result.documentElement.children.length).toBe(1);
+    expect(result.documentElement.children[0].tagName).toBe('circle');
+    expect(result.documentElement.children[0].getAttribute('cx')).toBe('50');
+    expect(result.documentElement.children[0].getAttribute('cy')).toBe('50');
+    expect(result.documentElement.children[0].getAttribute('r')).toBe('40');
   });
 });
