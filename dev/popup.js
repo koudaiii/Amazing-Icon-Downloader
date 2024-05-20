@@ -93,21 +93,6 @@ function getWebContainerSVG() {
   return Array.from(document.querySelectorAll('svg'));
 }
 
-/**
- * Finds and returns an array of URLs for SVG images from the current document.
- * @returns {Array} An array of URLs for SVG images.
- */
-function findSVGURLs() {
-  let imageTags = Array.from(document.querySelectorAll('img'));
-  let svgURLs = [];
-  svgURLs = imageTags.filter((node) => {
-    if (node.src.includes('.svg')) {
-      return node;
-    }
-  });
-  return svgURLs;
-}
-
 async function getIcons() {
   // console.log(`\n\ngetIcons - START`);
 
@@ -121,7 +106,15 @@ async function getIcons() {
   let webContainerSVG = getWebContainerSVG();
   // console.log(webContainerSVG);
 
-  let svgURLs = findSVGURLs();
+  // find img tags with .svg
+  let imageTags = Array.from(document.querySelectorAll('img'));
+  let svgURLs = [];
+  svgURLs = imageTags.filter((node) => {
+    if (node.src.includes('.svg')) {
+      return node;
+    }
+  });
+
   // console.log(svgURLs);
 
   // Define the fetchDocument function
@@ -719,5 +712,4 @@ module.exports = {
   showURLErrorMessage,
   getCurrentTab,
   getWebContainerSVG,
-  findSVGURLs,
 };
