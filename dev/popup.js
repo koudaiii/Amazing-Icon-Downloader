@@ -41,6 +41,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+//
+/**
+ * Displays an error message when the URL is not supported.
+ * Currently, this function only works on the following URLs:
+ * - portal.azure.com
+ * - endpoint.microsoft.com
+ *
+ * @returns {void}
+ */
 function showURLErrorMessage() {
   document.getElementById('bodyContent').innerHTML = `
 	<i style="grid-column: span 3; color: darkred;">
@@ -56,6 +65,10 @@ function showURLErrorMessage() {
 	</i>`;
 }
 
+/**
+ * Retrieves the currently active tab in the browser.
+ * @returns {Promise<chrome.tabs.Tab>} The currently active tab.
+ */
 async function getCurrentTab() {
   let queryOptions = { active: true, lastFocusedWindow: true };
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
