@@ -76,21 +76,8 @@ async function getCurrentTab() {
   return tab;
 }
 
-/**
- * Retrieves the element with the ID 'FxSymbolContainer'.
- * @returns {HTMLElement} The element with the ID 'FxSymbolContainer'.
- */
 function getSymbols() {
   return document.getElementById('FxSymbolContainer');
-}
-
-/**
- * Retrieves all SVG elements within the document.
- *
- * @returns {Array<SVGElement>} An array of SVG elements.
- */
-function getWebContainerSVG() {
-  return Array.from(document.querySelectorAll('svg'));
 }
 
 async function getIcons() {
@@ -102,8 +89,7 @@ async function getIcons() {
 
   let symbols = getSymbols();
   // console.log(symbols);
-
-  let webContainerSVG = getWebContainerSVG();
+  let webContainerSVG = Array.from(document.querySelectorAll('svg'));
   // console.log(webContainerSVG);
 
   // find img tags with .svg
@@ -711,5 +697,4 @@ module.exports = {
   getSymbols,
   showURLErrorMessage,
   getCurrentTab,
-  getWebContainerSVG,
 };
