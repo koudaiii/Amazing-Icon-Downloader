@@ -1,8 +1,7 @@
 const popup = require('./popup');
 const fetchMock = require('fetch-mock-jest');
 
-const { getSymbols, showURLErrorMessage, getCurrentTab, getWebContainerSVG } =
-  popup;
+const { getSymbols, showURLErrorMessage, getCurrentTab } = popup;
 
 describe('getSymbols', () => {
   beforeEach(() => {
@@ -64,21 +63,5 @@ describe('getCurrentTab', () => {
     // Assert
     expect(chrome.tabs.query).toHaveBeenCalledWith(queryOptions);
     expect(result).toBe(expectedTab);
-  });
-});
-
-describe('getWebContainerSVG', () => {
-  it('should return an array of SVG elements', () => {
-    // Arrange
-    const svgElement1 = document.createElement('svg');
-    const svgElement2 = document.createElement('svg');
-    document.body.appendChild(svgElement1);
-    document.body.appendChild(svgElement2);
-
-    // Act
-    const result = getWebContainerSVG();
-
-    // Assert
-    expect(result).toEqual([svgElement1, svgElement2]);
   });
 });
