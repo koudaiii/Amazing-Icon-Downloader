@@ -12,9 +12,6 @@
     "testEnvironment": "jsdom",
     "testMatch": [
       "**/dev/*.test.js"
-    ],
-    "setupFiles": [
-      "<rootDir>/mock-extension-apis.js"
     ]
   },
   "dependencies": {

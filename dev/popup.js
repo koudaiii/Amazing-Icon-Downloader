@@ -696,5 +696,4 @@ async function convertSVGToPNG(svg) {
 module.exports = {
   getSymbols,
   showURLErrorMessage,
-  getCurrentTab,
 };

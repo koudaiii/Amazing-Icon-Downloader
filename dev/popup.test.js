@@ -1,7 +1,7 @@
 const popup = require('./popup');
 const fetchMock = require('fetch-mock-jest');
 
-const { getSymbols, showURLErrorMessage, getCurrentTab } = popup;
+const { getSymbols, showURLErrorMessage } = popup;
 
 describe('getSymbols', () => {
   beforeEach(() => {
@@ -47,21 +47,5 @@ describe('showURLErrorMessage', () => {
         Contact <a href="mailto:matt@mattlag.com">matt@mattlag.com</a> for help.
       </i>`;
     expect(bodyContentElement.innerHTML).toBe(errorMessage);
-  });
-});
-
-describe('getCurrentTab', () => {
-  it('should return the current active tab', async () => {
-    // Arrange
-    const queryOptions = { active: true, lastFocusedWindow: true };
-    const expectedTab = { id: 1, url: 'https://example.com' };
-    chrome.tabs.query.mockResolvedValue([expectedTab]);
-
-    // Act
-    const result = await getCurrentTab();
-
-    // Assert
-    expect(chrome.tabs.query).toHaveBeenCalledWith(queryOptions);
-    expect(result).toBe(expectedTab);
   });
 });
