@@ -650,48 +650,78 @@ function toggleDownloadType() {
 function downloadAllIcons() {
   const button = document.getElementById('downloadAllButton');
   button.innerHTML = 'Downloading...';
-  try {
-    window
-      .setTimeout(async () => {
-        const zip = new JSZip();
-        const iconFolder = zip.folder('icons');
-        const dataURLHeaderLength = 'data:image/png;base64,'.length;
-        try {
-          for (let key of Object.keys(_iconData)) {
-            let data = _iconData[key];
-            iconFolder.file(
-              `${data.name}.svg`,
-              new Blob([data.svg], { type: 'svg' }),
-            );
-            let base64Data = await convertSVGToPNG(data.svg);
-            base64Data = base64Data.slice(dataURLHeaderLength);
-            iconFolder.file(`${data.name}.png`, base64Data, { base64: true });
-          }
+  window.setTimeout(async () => {
+    const zip = new JSZip();
+    const iconFolder = zip.folder('icons');
+    const dataURLHeaderLength = 'data:image/png;base64,'.length;
+    for (let key of Object.keys(_iconData)) {
+      let data = _iconData[key];
+      iconFolder.file(
+        `${data.name}.svg`,
+        new Blob([data.svg], { type: 'svg' }),
+      );
+      console.log(data.name);
+      console.log(data.svg);
+      let base64Data;
+      try {
+        base64Data = await convertSVGToPNG(data.svg);
+      } catch (error) {
+        console.log('Error converting SVG to PNG:', error);
+        // Skip this icon and continue with the next one
+        continue;
+      }
+      if (!base64Data) {
+        console.log('No base64 data received for icon:', data.name);
+        // Skip this icon and continue with the next one
+        continue;
+      }
+      base64Data = base64Data.slice(dataURLHeaderLength);
+      console.log(base64Data);
+      base64Data = base64Data.slice(dataURLHeaderLength);
+      console.log(base64Data);
+      iconFolder.file(`${data.name}.png`, base64Data, { base64: true });
+      console.log('valid download data', data.name);
+    }
 
-          zip.generateAsync({ type: 'blob' }).then(function (content) {
-            downloadFileFromBlob('icons.zip', content);
-            button.innerHTML = 'Download all icons as a .zip';
-          });
-        } catch (error) {
-          console.error('Download failed:', error);
-        } finally {
-          button.innerHTML = 'Download failed';
-        }
-      }, 100)
-      .catch(async (error) => {
-        console.error('Timeout error:', error);
-        await new Promise((resolve) => {
-          document
-            .getElementById('downloadAllButton')
-            .addEventListener('click', () => {
-              resolve();
-            });
-        });
+    console.log('All icons added to zip');
+    // check success. If success, then download the zip, if not, then catch the error
+    try {
+      const content = await zip.generateAsync({ type: 'blob' });
+      if (content.size > 0) {
+        downloadFileFromBlob('icons.zip', content);
         button.innerHTML = 'Download all icons as a .zip';
-      });
-  } catch (error) {
-    console.error('Error:', error);
-  }
+      } else {
+        // Create the third row and display an error
+        const thirdRow = document.createElement('div');
+        thirdRow.classList.add('thirdRow');
+        thirdRow.innerText = 'Error generating zip: No icons to download';
+        thirdRow.style.top = `${button.offsetTop - thirdRow.offsetHeight}px`;
+        thirdRow.style.left = `${button.offsetLeft}px`;
+        document.querySelector('.secondRow').appendChild(thirdRow);
+        button.innerHTML = 'Download failed: No icons to download';
+        button.disabled = true;
+      }
+    } catch (error) {
+      // Create the third row and display an error
+      const thirdRow = document.createElement('div');
+      thirdRow.classList.add('thirdRow');
+      thirdRow.innerText = `Error generating zip: ${error}`;
+      thirdRow.style.top = `${button.offsetTop - thirdRow.offsetHeight}px`;
+      thirdRow.style.left = `${button.offsetLeft}px`;
+      document.querySelector('.secondRow').appendChild(thirdRow);
+      button.innerHTML = 'Download failed';
+      button.disabled = true;
+//    } finally {
+//      await new Promise((resolve) => {
+//        document
+//          .getElementById('downloadAllButton')
+//          .addEventListener('click', () => {
+//            resolve();
+//          });
+//      });
+//      button.innerHTML = 'Download all icons as a .zip';
+    }
+  }, 100)
 }
 
 async function convertSVGToPNG(svg) {
