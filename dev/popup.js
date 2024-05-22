@@ -660,8 +660,8 @@ function downloadAllIcons() {
         `${data.name}.svg`,
         new Blob([data.svg], { type: 'svg' }),
       );
-      console.log(data.name);
-      console.log(data.svg);
+      console.log('data.name:', data.name);
+      console.log('data.svg:', data.svg);
       let base64Data;
       try {
         base64Data = await convertSVGToPNG(data.svg);
