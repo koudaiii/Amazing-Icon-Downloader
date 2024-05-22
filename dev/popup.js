@@ -676,9 +676,7 @@ function downloadAllIcons() {
         continue;
       }
       base64Data = base64Data.slice(dataURLHeaderLength);
-      console.log(base64Data);
-      base64Data = base64Data.slice(dataURLHeaderLength);
-      console.log(base64Data);
+      console.log('base64Data:', base64Data);
       iconFolder.file(`${data.name}.png`, base64Data, { base64: true });
       console.log('valid download data', data.name);
     }
