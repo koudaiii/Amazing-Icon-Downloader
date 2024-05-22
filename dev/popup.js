@@ -725,17 +725,21 @@ function downloadAllIcons() {
 }
 
 async function convertSVGToPNG(svg) {
-  const workingCanvas = document.createElement('canvas');
-  workingCanvas.height = 1000;
-  workingCanvas.width = 1000;
-  const ctx = workingCanvas.getContext('2d');
+  try {
+    const workingCanvas = document.createElement('canvas');
+    workingCanvas.height = 1000;
+    workingCanvas.width = 1000;
+    const ctx = workingCanvas.getContext('2d');
 
-  const workingImage = new Image();
-  workingImage.src = 'data:image/svg+xml; charset=utf8, ';
-  workingImage.src += encodeURIComponent(svg);
-  await workingImage.decode();
+    const workingImage = new Image();
+    workingImage.src = 'data:image/svg+xml; charset=utf8, ';
+    workingImage.src += encodeURIComponent(svg);
+    await workingImage.decode();
 
-  ctx.drawImage(workingImage, 0, 0);
-  const resultData = workingCanvas.toDataURL('image/png');
-  return resultData;
+    ctx.drawImage(workingImage, 0, 0);
+    const resultData = workingCanvas.toDataURL('image/png');
+    return resultData;
+  } catch (error) {
+    console.log('Error converting SVG to PNG:', error);
+  }
 }
