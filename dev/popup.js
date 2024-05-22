@@ -660,28 +660,28 @@ function downloadAllIcons() {
         `${data.name}.svg`,
         new Blob([data.svg], { type: 'svg' }),
       );
-      console.log('data.name:', data.name);
-      console.log('data.svg:', data.svg);
+      // console.log('data.name:', data.name);
+      // console.log('data.svg:', data.svg);
       let base64Data;
       try {
         base64Data = await convertSVGToPNG(data.svg);
       } catch (error) {
-        console.log('Error converting SVG to PNG:', error);
+        // console.log('Error converting SVG to PNG:', error);
         // Skip this icon and continue with the next one
         continue;
       }
       if (!base64Data) {
-        console.log('No base64 data received for icon:', data.name);
+        // console.log('No base64 data received for icon:', data.name);
         // Skip this icon and continue with the next one
         continue;
       }
       base64Data = base64Data.slice(dataURLHeaderLength);
-      console.log('base64Data:', base64Data);
+      // console.log('base64Data:', base64Data);
       iconFolder.file(`${data.name}.png`, base64Data, { base64: true });
-      console.log('valid download data', data.name);
+      // console.log('valid download data', data.name);
     }
 
-    console.log('All icons added to zip');
+    // console.log('All icons added to zip');
     // check success. If success, then download the zip, if not, then catch the error
     try {
       const content = await zip.generateAsync({ type: 'blob' });
