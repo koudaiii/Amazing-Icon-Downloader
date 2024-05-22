@@ -711,17 +711,17 @@ function downloadAllIcons() {
       document.querySelector('.secondRow').appendChild(thirdRow);
       button.innerHTML = 'Download failed';
       button.disabled = true;
-//    } finally {
-//      await new Promise((resolve) => {
-//        document
-//          .getElementById('downloadAllButton')
-//          .addEventListener('click', () => {
-//            resolve();
-//          });
-//      });
-//      button.innerHTML = 'Download all icons as a .zip';
+      //    } finally {
+      //      await new Promise((resolve) => {
+      //        document
+      //          .getElementById('downloadAllButton')
+      //          .addEventListener('click', () => {
+      //            resolve();
+      //          });
+      //      });
+      //      button.innerHTML = 'Download all icons as a .zip';
     }
-  }, 100)
+  }, 100);
 }
 
 async function convertSVGToPNG(svg) {
